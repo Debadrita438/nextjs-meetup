@@ -34,7 +34,7 @@ export const getStaticProps = async () => {
                 id: meetup._id.toString()
             }))
         },
-        revalidate: 10 // to regenerate page to show the new contents
+        revalidate: 1 // to regenerate page to show the new contents
     };
 };
 
