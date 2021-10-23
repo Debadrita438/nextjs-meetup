@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import MeetupList from '../src/components/Meetups/MeetupList';
 
 const DUMMY_MEETUPS = [
@@ -20,16 +19,33 @@ const DUMMY_MEETUPS = [
     }
 ];
 
-const HomePage = () => {
-    const [ loadedMeetups, setLoadedMeetups ] = useState([]);
-
-    useEffect(() => {
-        // Fetching data
-
-        setLoadedMeetups(DUMMY_MEETUPS);
-    }, []);
-
-    return <MeetupList meetups={loadedMeetups} />;
+const HomePage = (props) => {
+    return <MeetupList meetups={props.meetups} />;
 };
+
+// Two types to fetch data using API
+
+// to fetch data and regenerate page on every incoming request - not after some seconds
+export const getServerSideProps = (context) => {
+    const req = context.req;
+    const res = context.res;
+
+    // fetch data from api
+    return {
+        props: {
+            meetups: DUMMY_MEETUPS
+        }
+    };
+};
+
+// export const getStaticProps = async () => {
+//     // fetch data from api
+//     return {
+//         props: {
+//             meetups: DUMMY_MEETUPS
+//         },
+//         revalidate: 10 // to regenerate page to show the new contents
+//     };
+// };
 
 export default HomePage;
