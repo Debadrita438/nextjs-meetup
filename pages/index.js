@@ -23,29 +23,14 @@ const HomePage = (props) => {
     return <MeetupList meetups={props.meetups} />;
 };
 
-// Two types to fetch data using API
-
-// to fetch data and regenerate page on every incoming request - not after some seconds
-export const getServerSideProps = (context) => {
-    const req = context.req;
-    const res = context.res;
-
+export const getStaticProps = async () => {
     // fetch data from api
     return {
         props: {
             meetups: DUMMY_MEETUPS
-        }
+        },
+        revalidate: 10 // to regenerate page to show the new contents
     };
 };
-
-// export const getStaticProps = async () => {
-//     // fetch data from api
-//     return {
-//         props: {
-//             meetups: DUMMY_MEETUPS
-//         },
-//         revalidate: 10 // to regenerate page to show the new contents
-//     };
-// };
 
 export default HomePage;
