@@ -1,27 +1,18 @@
+import Head from 'next/head';
 import { MongoClient } from 'mongodb';
 import MeetupList from '../src/components/Meetups/MeetupList';
-
-const DUMMY_MEETUPS = [
-    {
-        id: 'm1',
-        title: 'A First Meetup',
-        image:
-            'https://cdn.vox-cdn.com/thumbor/Ksi3v8e1tj1ZcQeRV1ZtmCYIM7k=/0x0:4284x2916/1200x800/filters:focal(1800x1116:2484x1800)/cdn.vox-cdn.com/uploads/chorus_image/image/61918529/NorthBroadSt_Landscape_1_M.Edlow.0.jpg',
-        address: 'Some Address 12, Some city, 123456',
-        description: 'This is a first meetup'
-    },
-    {
-        id: 'm2',
-        title: 'A Second Meetup',
-        image:
-            'https://cdn.vox-cdn.com/thumbor/Ksi3v8e1tj1ZcQeRV1ZtmCYIM7k=/0x0:4284x2916/1200x800/filters:focal(1800x1116:2484x1800)/cdn.vox-cdn.com/uploads/chorus_image/image/61918529/NorthBroadSt_Landscape_1_M.Edlow.0.jpg',
-        address: 'Some Address 1, Some city, 123456',
-        description: 'This is a second meetup'
-    }
-];
+import { Fragment } from 'react';
 
 const HomePage = (props) => {
-    return <MeetupList meetups={props.meetups} />;
+    return (
+        <Fragment>
+            <Head>
+                <title>React Meetups</title>
+                <meta name='description' content='Browse a huge list of highly active React meetups!' />
+            </Head>
+            <MeetupList meetups={props.meetups} />
+        </Fragment>
+    );
 };
 
 export const getStaticProps = async () => {
